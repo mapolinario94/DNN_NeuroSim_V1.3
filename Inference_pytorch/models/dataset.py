@@ -1,6 +1,6 @@
 import torch
 from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 import os
 
 def get_cifar10(batch_size, data_root='/tmp/public_dataset/pytorch', train=True, val=True, **kwargs):
@@ -108,3 +108,32 @@ def get_imagenet(batch_size, data_root='/home/shimeng/Documents/Data', train=Tru
         ds.append(test_loader)
     ds = ds[0] if len(ds) == 1 else ds
     return ds
+
+def custom_dataset(batch_size, data_root='/tmp/public_dataset/pytorch', train=True, val=True, **kwargs):
+    train_dataset = CustomDataset()
+    num_workers = kwargs.setdefault('num_workers', 1)
+    kwargs.pop('input_size', None)
+    ds = []
+    if train:
+        train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, **kwargs)
+        ds.append(train_loader)
+    if val:
+        test_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, **kwargs)
+        ds.append(test_loader)
+
+    ds = ds[0] if len(ds) == 1 else ds
+    return ds
+
+
+class CustomDataset(Dataset):
+    def __init__(self):
+        self.data = "Custom"
+
+    def __len__(self):
+        return 100
+
+    def __getitem__(self, idx):
+        img = torch.randn([1, 4, 256, 256])
+        label = torch.ones([1, 64, 128, 128])
+
+        return img, label

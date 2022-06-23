@@ -16,10 +16,10 @@ from utee import hook
 from datetime import datetime
 from subprocess import call
 parser = argparse.ArgumentParser(description='PyTorch CIFAR-X Example')
-parser.add_argument('--dataset', default='cifar10', help='cifar10|cifar100|imagenet')
-parser.add_argument('--model', default='VGG8', help='VGG8|DenseNet40|ResNet18')
+parser.add_argument('--dataset', default='custom', help='cifar10|cifar100|imagenet')
+parser.add_argument('--model', default='custom', help='VGG8|DenseNet40|ResNet18')
 parser.add_argument('--mode', default='WAGE', help='WAGE|FP')
-parser.add_argument('--batch_size', type=int, default=500, help='input batch size for training (default: 64)')
+parser.add_argument('--batch_size', type=int, default=1, help='input batch size for training (default: 64)')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs to train (default: 10)')
 parser.add_argument('--grad_scale', type=float, default=8, help='learning rate for wage delta calculation')
 parser.add_argument('--seed', type=int, default=117, help='random seed (default: 1)')
@@ -28,16 +28,16 @@ parser.add_argument('--test_interval', type=int, default=1,  help='how many epoc
 parser.add_argument('--logdir', default='log/default', help='folder to save to the log')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate (default: 1e-3)')
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
-parser.add_argument('--wl_weight', type=int, default=8)
+parser.add_argument('--wl_weight', type=int, default=4)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=8)
+parser.add_argument('--wl_activate', type=int, default=1)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
 parser.add_argument('--inference', type=int, default=0, help='run hardware inference simulation')
-parser.add_argument('--subArray', type=int, default=128, help='size of subArray (e.g. 128*128)')
-parser.add_argument('--ADCprecision', type=int, default=5, help='ADC precision (e.g. 5-bit)')
-parser.add_argument('--cellBit', type=int, default=4, help='cell precision (e.g. 4-bit/cell)')
+parser.add_argument('--subArray', type=int, default=64, help='size of subArray (e.g. 128*128)')
+parser.add_argument('--ADCprecision', type=int, default=1, help='ADC precision (e.g. 5-bit)')
+parser.add_argument('--cellBit', type=int, default=1, help='cell precision (e.g. 4-bit/cell)')
 parser.add_argument('--onoffratio', type=float, default=10, help='device on/off ratio (e.g. Gmax/Gmin = 3)')
 # if do not run the device retention / conductance variation effects, set vari=0, v=0
 parser.add_argument('--vari', type=float, default=0., help='conductance variation (e.g. 0.1 standard deviation to generate random variation)')
@@ -68,17 +68,19 @@ if args.cuda:
 	torch.cuda.manual_seed(args.seed)
 
 # data loader and model
-assert args.dataset in ['cifar10', 'cifar100', 'imagenet'], args.dataset
+# assert args.dataset in ['cifar10', 'cifar100', 'imagenet'], args.dataset
 if args.dataset == 'cifar10':
     train_loader, test_loader = dataset.get_cifar10(batch_size=args.batch_size, num_workers=1)
 elif args.dataset == 'cifar100':
     train_loader, test_loader = dataset.get_cifar100(batch_size=args.batch_size, num_workers=1)
 elif args.dataset == 'imagenet':
     train_loader, test_loader = dataset.get_imagenet(batch_size=args.batch_size, num_workers=1)
+elif args.dataset == 'custom':
+    train_loader, test_loader = dataset.custom_dataset(batch_size=args.batch_size, num_workers=1)
 else:
     raise ValueError("Unknown dataset type")
     
-assert args.model in ['VGG8', 'DenseNet40', 'ResNet18'], args.model
+# assert args.model in ['VGG8', 'DenseNet40', 'ResNet18'], args.model
 if args.model == 'VGG8':
     from models import VGG
     model_path = './log/VGG8.pth'   # WAGE mode pretrained model
@@ -93,6 +95,9 @@ elif args.model == 'ResNet18':
     # model_path = './log/xxx.pth'
     # modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = model_path)
     modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = True)
+elif args.model == 'custom':
+    from models import Custom
+    modelCF = Custom.l1(args=args, logger=logger, pretrained=None)
 else:
     raise ValueError("Unknown model type")
 
