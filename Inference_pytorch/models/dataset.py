@@ -133,7 +133,7 @@ class CustomDataset(Dataset):
         return 10
 
     def __getitem__(self, idx):
-        img = torch.randn([1, 4, 256, 256])
-        label = torch.ones([1, 64, 128, 128])
+        img = torch.randn([4, 256, 256])
+        label = torch.ones([64, 128, 128])
 
         return img, label
