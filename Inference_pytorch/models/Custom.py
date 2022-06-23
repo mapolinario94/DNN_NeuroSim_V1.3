@@ -35,7 +35,7 @@ def make_layers(cfg, args, logger ):
             else:
                 padding = 0
             if args.mode == "WAGE":
-                conv2d = QConv2d(in_channels, out_channels, kernel_size=v[2], padding=padding, stride=2,
+                conv2d = QConv2d(in_channels, out_channels, kernel_size=v[2], padding=padding,
                                  logger=logger,wl_input = args.wl_activate,wl_activate=args.wl_activate,
                                  wl_error=args.wl_error,wl_weight= args.wl_weight,inference=args.inference,onoffratio=args.onoffratio,cellBit=args.cellBit,
                                  subArray=args.subArray,ADCprecision=args.ADCprecision,vari=args.vari,t=args.t,v=args.v,detect=args.detect,target=args.target,
@@ -70,7 +70,7 @@ def make_layers(cfg, args, logger ):
 
 
 cfg_list = {
-    'l1': [('C', 64, 4, 'same', 2.0), ('M', 128, 128)]
+    'l1': [('C', 64, 4, 'same', 2.0), ('M', 256, 256)]
 }
 
 def l1( args, logger, pretrained=None):
