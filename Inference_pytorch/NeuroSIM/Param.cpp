@@ -62,7 +62,7 @@ Param::Param() {
 								// 2: cell.memCellType = Type::RRAM
 								// 3: cell.memCellType = Type::FeFET
 	
-	accesstype = 1;         	// 1: cell.accessType = CMOS_access
+	accesstype = 4;         	// 1: cell.accessType = CMOS_access
 								// 2: cell.accessType = BJT_access
 								// 3: cell.accessType = diode_access
 								// 4: cell.accessType = none_access (Crossbar Array)
@@ -91,7 +91,7 @@ Param::Param() {
 	reLu = true;                // false: sigmoid
 								// true: reLu
 
-	novelMapping = true;        // false: conventional mapping
+	novelMapping = false;        // false: conventional mapping
 								// true: novel mapping
 
 	SARADC = false;              // false: MLSA
@@ -106,7 +106,7 @@ Param::Param() {
 								// A speed-up degree upper bound: when there is no idle period during each layer --> no need to further fold the system clock
 								// This idle period is defined by IFM sizes and data flow, the actual process latency of each layer may be different due to extra peripheries
 
-	validated = true;			// false: no calibration factors
+	validated = false;			// false: no calibration factors
 								// true: validated by silicon data (wiring area in layout, gate switching activity, post-layout performance drop...)
 
 	synchronous = true;			// false: asynchronous
