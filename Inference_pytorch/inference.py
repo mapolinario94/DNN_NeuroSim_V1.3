@@ -34,7 +34,7 @@ parser.add_argument('--wl_activate', type=int, default=1)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
-parser.add_argument('--inference', type=int, default=0, help='run hardware inference simulation')
+parser.add_argument('--inference', type=int, default=1, help='run hardware inference simulation')
 parser.add_argument('--subArray', type=int, default=64, help='size of subArray (e.g. 128*128)')
 parser.add_argument('--ADCprecision', type=int, default=1, help='ADC precision (e.g. 5-bit)')
 parser.add_argument('--cellBit', type=int, default=1, help='cell precision (e.g. 4-bit/cell)')
