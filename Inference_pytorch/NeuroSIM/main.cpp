@@ -183,17 +183,17 @@ int main(int argc, char * argv[]) {
 	for (int i=0; i<netStructure.size(); i++) {
 		numComputation += 2*(netStructure[i][0] * netStructure[i][1] * netStructure[i][2] * netStructure[i][3] * netStructure[i][4] * netStructure[i][5]);
 	}
-    cout << "---------------------------- FloorPlan Done ------------------------------" <<  endl;
+
 	ChipInitialize(inputParameter, tech, cell, netStructure, markNM, numTileEachLayer,
 					numPENM, desiredNumTileNM, desiredPESizeNM, desiredNumTileCM, desiredTileSizeCM, desiredPESizeCM, numTileRow, numTileCol);
-	cout << "---------------------------- FloorPlan Done ------------------------------" <<  endl;
+
 	double chipHeight, chipWidth, chipArea, chipAreaIC, chipAreaADC, chipAreaAccum, chipAreaOther, chipAreaArray;
 	double CMTileheight = 0;
 	double CMTilewidth = 0;
 	double NMTileheight = 0;
 	double NMTilewidth = 0;
 	vector<double> chipAreaResults;
-	cout << "---------------------------- FloorPlan Done ------------------------------" <<  endl;
+
 	chipAreaResults = ChipCalculateArea(inputParameter, tech, cell, desiredNumTileNM, numPENM, desiredPESizeNM, desiredNumTileCM, desiredTileSizeCM, desiredPESizeCM, numTileRow, 
 					&chipHeight, &chipWidth, &CMTileheight, &CMTilewidth, &NMTileheight, &NMTilewidth);		
 	chipArea = chipAreaResults[0];
@@ -202,7 +202,7 @@ int main(int argc, char * argv[]) {
 	chipAreaAccum = chipAreaResults[3];
 	chipAreaOther = chipAreaResults[4];
 	chipAreaArray = chipAreaResults[5];
-    cout << "---------------------------- FloorPlan Done ------------------------------" <<  endl;
+
 	double clkPeriod = 0;
 	double layerclkPeriod = 0;
 	
@@ -247,7 +247,8 @@ int main(int argc, char * argv[]) {
 						&coreLatencyADC, &coreLatencyAccum, &coreLatencyOther, &coreEnergyADC, &coreEnergyAccum, &coreEnergyOther, true, &layerclkPeriod);
 			if(clkPeriod < layerclkPeriod){
 				clkPeriod = layerclkPeriod;
-			}			
+			}
+			cout << "---------------------------- FloorPlan Done ------------------------------"<< i <<  endl;
 		}		
 		if(param->clkFreq > 1/clkPeriod){
 			param->clkFreq = 1/clkPeriod;
