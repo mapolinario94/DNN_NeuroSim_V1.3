@@ -582,18 +582,18 @@ double ChipCalculatePerformance(InputParameter& inputParameter, Technology& tech
 							double desiredPESizeCM, double CMTileheight, double CMTilewidth, double NMTileheight, double NMTilewidth,
 							double *readLatency, double *readDynamicEnergy, double *leakage, double *bufferLatency, double *bufferDynamicEnergy, double *icLatency, double *icDynamicEnergy, 
 							double *coreLatencyADC, double *coreLatencyAccum, double *coreLatencyOther, double *coreEnergyADC, double *coreEnergyAccum, double *coreEnergyOther, bool CalculateclkFreq, double *clkPeriod) {
-	cout << "---------------------------- FloorPlan Done ------------------------------"<<   endl;
+
 	
 	int numRowPerSynapse, numColPerSynapse;
 	numRowPerSynapse = param->numRowPerSynapse;
 	numColPerSynapse = param->numColPerSynapse;
-	cout << "---------------------------- FloorPlan Done ------------------------------"<<  endl;
+
 	// only get performance of single layer
 	int l = layerNumber;
 	// get weight matrix file Size
 	int weightMatrixRow = netStructure[l][2]*netStructure[l][3]*netStructure[l][4]*numRowPerSynapse;
 	int weightMatrixCol = netStructure[l][5]*numColPerSynapse;
-	cout << "---------------------------- FloorPlan Done ------------------------------"<< endl;
+
 	// load in whole file 
 	vector<vector<double> > inputVector;
 	inputVector = LoadInInputData(inputfile); 
@@ -622,7 +622,7 @@ double ChipCalculatePerformance(InputParameter& inputParameter, Technology& tech
 	for (int i=0; i<netStructure.size(); i++) {
 		totalNumTile += numTileEachLayer[0][i] * numTileEachLayer[1][i];
 	}
-	cout << "---------------------------- FloorPlan Done ------------------------------"<<  endl;
+
 	if (markNM[l] == 0) {   // conventional mapping
 		for (int i=0; i<ceil((double) netStructure[l][2]*(double) netStructure[l][3]*(double) netStructure[l][4]*(double) numRowPerSynapse/desiredTileSizeCM); i++) {       // # of tiles in row
 			for (int j=0; j<ceil((double) netStructure[l][5]*(double) numColPerSynapse/(double) desiredTileSizeCM); j++) {   // # of tiles in Column
