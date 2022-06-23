@@ -134,6 +134,6 @@ class CustomDataset(Dataset):
 
     def __getitem__(self, idx):
         img = torch.randn([4, 256, 256])
-        label = torch.ones([64, 128, 128])
+        label = torch.ones([10])
 
         return img, label
