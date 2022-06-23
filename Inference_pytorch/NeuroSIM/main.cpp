@@ -248,7 +248,6 @@ int main(int argc, char * argv[]) {
 			if(clkPeriod < layerclkPeriod){
 				clkPeriod = layerclkPeriod;
 			}
-			cout << "---------------------------- FloorPlan Done ------------------------------"<< i <<  endl;
 		}		
 		if(param->clkFreq > 1/clkPeriod){
 			param->clkFreq = 1/clkPeriod;
