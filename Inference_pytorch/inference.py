@@ -121,18 +121,19 @@ criterion = torch.nn.CrossEntropyLoss()
 for i, (data, target) in enumerate(test_loader):
     if i==0:
         hook_handle_list = hook.hardware_evaluation(modelCF,args.wl_weight,args.wl_activate,args.model,args.mode)
-    indx_target = target.clone()
-    if args.cuda:
-        data, target = data.cuda(), target.cuda()
-    with torch.no_grad():
-        data, target = Variable(data), Variable(target)
-        output = modelCF(data)
+    # indx_target = target.clone()
+    # if args.cuda:
+    #     data, target = data.cuda(), target.cuda()
+    # with torch.no_grad():
+    #     data, target = Variable(data), Variable(target)
+    #     output = modelCF(data)
         # test_loss_i = criterion(output, target)
         # test_loss += test_loss_i.data
         # pred = output.data.max(1)[1]  # get the index of the max log-probability
         # correct += pred.cpu().eq(indx_target).sum()
     if i==0:
         hook.remove_hook_list(hook_handle_list)
+    break
 
 # test_loss = test_loss / len(test_loader)  # average over number of mini-batch
 # acc = 100. * correct / len(test_loader.dataset)
