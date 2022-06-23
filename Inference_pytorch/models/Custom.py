@@ -20,7 +20,7 @@ class L1(nn.Module):
 
 def make_layers(cfg, args, logger ):
     layers = []
-    in_channels = 3
+    in_channels = 4
     for i, v in enumerate(cfg):
         if v[0] == 'M':
             layers += [nn.MaxPool2d(kernel_size=v[1], stride=v[2])]
