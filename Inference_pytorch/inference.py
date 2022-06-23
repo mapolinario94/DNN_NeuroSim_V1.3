@@ -111,6 +111,7 @@ modelCF.eval()
 
 test_loss = 0
 correct = 0
+acc = 0
 trained_with_quantization = True
 
 criterion = torch.nn.CrossEntropyLoss()
@@ -126,17 +127,17 @@ for i, (data, target) in enumerate(test_loader):
     with torch.no_grad():
         data, target = Variable(data), Variable(target)
         output = modelCF(data)
-        test_loss_i = criterion(output, target)
-        test_loss += test_loss_i.data
-        pred = output.data.max(1)[1]  # get the index of the max log-probability
-        correct += pred.cpu().eq(indx_target).sum()
+        # test_loss_i = criterion(output, target)
+        # test_loss += test_loss_i.data
+        # pred = output.data.max(1)[1]  # get the index of the max log-probability
+        # correct += pred.cpu().eq(indx_target).sum()
     if i==0:
         hook.remove_hook_list(hook_handle_list)
 
-test_loss = test_loss / len(test_loader)  # average over number of mini-batch
-acc = 100. * correct / len(test_loader.dataset)
-
-accuracy = acc.cpu().data.numpy()
+# test_loss = test_loss / len(test_loader)  # average over number of mini-batch
+# acc = 100. * correct / len(test_loader.dataset)
+#
+# accuracy = acc.cpu().data.numpy()
 
 if args.inference:
     print(" --- Hardware Properties --- ")
