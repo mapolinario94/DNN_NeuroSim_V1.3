@@ -130,7 +130,7 @@ class CustomDataset(Dataset):
         self.data = "Custom"
 
     def __len__(self):
-        return 100
+        return 10
 
     def __getitem__(self, idx):
         img = torch.randn([1, 4, 256, 256])
