@@ -74,8 +74,8 @@ Param::Param() {
 								
 	globalBufferType = false;    // false: register file
 								// true: SRAM
-	globalBufferCoreSizeRow = 64;
-	globalBufferCoreSizeCol = 64;
+	globalBufferCoreSizeRow = 128;
+	globalBufferCoreSizeCol = 128;
 
 	tileBufferType = false;      // false: register file
 								// true: SRAM
@@ -85,13 +85,13 @@ Param::Param() {
 	peBufferType = false;        // false: register file
 								// true: SRAM
 
-	chipActivation = false;      // false: activation (reLu/sigmoid) inside Tile
+	chipActivation = true;      // false: activation (reLu/sigmoid) inside Tile
 								// true: activation outside Tile
 
 	reLu = true;                // false: sigmoid
 								// true: reLu
 
-	novelMapping = false;        // false: conventional mapping
+	novelMapping = true;        // false: conventional mapping
 								// true: novel mapping
 
 	SARADC = false;              // false: MLSA
@@ -106,7 +106,7 @@ Param::Param() {
 								// A speed-up degree upper bound: when there is no idle period during each layer --> no need to further fold the system clock
 								// This idle period is defined by IFM sizes and data flow, the actual process latency of each layer may be different due to extra peripheries
 
-	validated = false;			// false: no calibration factors
+	validated = true;			// false: no calibration factors
 								// true: validated by silicon data (wiring area in layout, gate switching activity, post-layout performance drop...)
 
 	synchronous = true;			// false: asynchronous
@@ -133,20 +133,20 @@ Param::Param() {
 	globalBusDelayTolerance = 0.1;      // to relax bus delay for global H-Tree (chip level: communication among tiles), if tolerance is 0.1, the latency will be relax to (1+0.1)*optimalLatency (trade-off with energy)
 	localBusDelayTolerance = 0.1;       // to relax bus delay for global H-Tree (tile level: communication among PEs), if tolerance is 0.1, the latency will be relax to (1+0.1)*optimalLatency (trade-off with energy)
 	treeFoldedRatio = 4;                // the H-Tree is assumed to be able to folding in layout (save area)
-	maxGlobalBusWidth = 20480;           // the max buswidth allowed on chip level (just a upper_bound, the actual bus width is defined according to the auto floorplan)
+	maxGlobalBusWidth = 2048;           // the max buswidth allowed on chip level (just a upper_bound, the actual bus width is defined according to the auto floorplan)
 										// NOTE: Carefully choose this number!!!
 										// e.g. when use pipeline with high speedUpDegree, i.e. high throughput, need to increase the global bus width (interface of global buffer) --> guarantee global buffer speed
 
-	numRowSubArray = 64;               // # of rows in single subArray
-	numColSubArray = 64;               // # of columns in single subArray
+	numRowSubArray = 128;               // # of rows in single subArray
+	numColSubArray = 128;               // # of columns in single subArray
 
 	/*** option to relax subArray layout ***/
 	relaxArrayCellHeight = 0;           // relax ArrayCellHeight or not
 	relaxArrayCellWidth = 0;            // relax ArrayCellWidth or not
 
 	numColMuxed = 8;                    // How many columns share 1 ADC (for eNVM and FeFET) or parallel SRAM
-	levelOutput = 2;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
-	cellBit = 1;                        // precision of memory device
+	levelOutput = 32;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
+	cellBit = 2;                        // precision of memory device
 
 	/*** parameters for SRAM ***/
 	// due the scaling, suggested SRAM cell size above 22nm: 160F^2

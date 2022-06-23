@@ -30,16 +30,16 @@ parser.add_argument('--test_interval', type=int, default=1, help='how many epoch
 parser.add_argument('--logdir', default='log/default', help='folder to save to the log')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate (default: 1e-3)')
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
-parser.add_argument('--wl_weight', type=int, default=4)
+parser.add_argument('--wl_weight', type=int, default=8)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=1)
+parser.add_argument('--wl_activate', type=int, default=8)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
-parser.add_argument('--inference', type=int, default=1, help='run hardware inference simulation')
-parser.add_argument('--subArray', type=int, default=64, help='size of subArray (e.g. 128*128)')
-parser.add_argument('--ADCprecision', type=int, default=1, help='ADC precision (e.g. 5-bit)')
-parser.add_argument('--cellBit', type=int, default=1, help='cell precision (e.g. 4-bit/cell)')
+parser.add_argument('--inference', type=int, default=0, help='run hardware inference simulation')
+parser.add_argument('--subArray', type=int, default=128, help='size of subArray (e.g. 128*128)')
+parser.add_argument('--ADCprecision', type=int, default=5, help='ADC precision (e.g. 5-bit)')
+parser.add_argument('--cellBit', type=int, default=4, help='cell precision (e.g. 4-bit/cell)')
 parser.add_argument('--onoffratio', type=float, default=10, help='device on/off ratio (e.g. Gmax/Gmin = 3)')
 # if do not run the device retention / conductance variation effects, set vari=0, v=0
 parser.add_argument('--vari', type=float, default=0.,
@@ -117,7 +117,7 @@ trained_with_quantization = True
 
 criterion = torch.nn.CrossEntropyLoss()
 # criterion = wage_util.SSE()
-print("Before the FOR loop")
+
 # for data, target in test_loader:
 for i, (data, target) in enumerate(test_loader):
     if i == 0:
@@ -134,6 +134,8 @@ for i, (data, target) in enumerate(test_loader):
     #     correct += pred.cpu().eq(indx_target).sum()
     if i == 0:
         hook.remove_hook_list(hook_handle_list)
+
+    break
 
 # test_loss = test_loss / len(test_loader)  # average over number of mini-batch
 # acc = 100. * correct / len(test_loader.dataset)
