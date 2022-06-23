@@ -117,7 +117,7 @@ trained_with_quantization = True
 
 criterion = torch.nn.CrossEntropyLoss()
 # criterion = wage_util.SSE()
-
+print("Before the FOR loop")
 # for data, target in test_loader:
 for i, (data, target) in enumerate(test_loader):
     if i == 0:
