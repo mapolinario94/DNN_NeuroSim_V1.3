@@ -109,8 +109,8 @@ def get_imagenet(batch_size, data_root='/home/shimeng/Documents/Data', train=Tru
     ds = ds[0] if len(ds) == 1 else ds
     return ds
 
-def custom_dataset(batch_size, data_root='/tmp/public_dataset/pytorch', train=True, val=True, **kwargs):
-    train_dataset = CustomDataset()
+def custom_dataset(args, batch_size, data_root='/tmp/public_dataset/pytorch', train=True, val=True, **kwargs):
+    train_dataset = CustomDataset(args.model)
     num_workers = kwargs.setdefault('num_workers', 1)
     kwargs.pop('input_size', None)
     ds = []
@@ -126,14 +126,54 @@ def custom_dataset(batch_size, data_root='/tmp/public_dataset/pytorch', train=Tr
 
 
 class CustomDataset(Dataset):
-    def __init__(self):
+    def __init__(self, model):
         self.data = "Custom"
-
+        self.model = model
+        self.cfg_list_in_ch = {
+            'l1': (4, 64),
+            'l2': (64, 128),
+            'l3': (128, 256),
+            'l4': (256, 512),
+            'l5': (512, 512),
+            'l6': (512, 512),
+            'l7': (512, 512),
+            'l8': (512, 512),
+            'l9': (512, 128),
+            'l10': (416, 64),
+            'l11': (224, 4),
+            'l12': (512, 32),
+            'l13': (416, 32),
+            'l14': (224, 32),
+            'l15': (100, 32)
+        }
+        self.cfg_list = {
+            'l1': (256, 256),
+            'l2':  ( 64, 64),
+            'l3':  ( 32, 32),
+            'l4':  ( 16, 16),
+            'l5':  ( 16, 16),
+            'l6':  ( 16, 16),
+            'l7':  ( 16, 16),
+            'l8':  ( 16, 16),
+            'l9':  ( 32, 32),
+            'l10': ( 64, 64),
+            'l11': ( 128, 128),
+            'l12': ( 32, 32),
+            'l13': ( 64, 64),
+            'l14': ( 128, 128),
+            'l15': ( 256, 256),
+        }
     def __len__(self):
         return 10
 
     def __getitem__(self, idx):
-        img = torch.randn([4, 256, 256])
-        label = torch.ones([10])
+        ch = self.cfg_list_in_ch[self.model]
+        in_ch = ch[0]
+        out_ch = ch[1]
+
+        size = self.cfg_list[self.model]
+
+        img = torch.randn([in_ch, size[0], size[1]])
+        label = torch.ones(out_ch)
 
         return img, label

@@ -17,7 +17,7 @@ from datetime import datetime
 from subprocess import call
 parser = argparse.ArgumentParser(description='PyTorch CIFAR-X Example')
 parser.add_argument('--dataset', default='custom', help='cifar10|cifar100|imagenet')
-parser.add_argument('--model', default='custom', help='VGG8|DenseNet40|ResNet18')
+parser.add_argument('--model', default='l1', help='VGG8|DenseNet40|ResNet18')
 parser.add_argument('--mode', default='WAGE', help='WAGE|FP')
 parser.add_argument('--batch_size', type=int, default=1, help='input batch size for training (default: 64)')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs to train (default: 10)')
@@ -76,30 +76,30 @@ elif args.dataset == 'cifar100':
 elif args.dataset == 'imagenet':
     train_loader, test_loader = dataset.get_imagenet(batch_size=args.batch_size, num_workers=1)
 elif args.dataset == 'custom':
-    train_loader, test_loader = dataset.custom_dataset(batch_size=args.batch_size, num_workers=1)
+    train_loader, test_loader = dataset.custom_dataset(args, batch_size=args.batch_size, num_workers=1)
 else:
     raise ValueError("Unknown dataset type")
     
 # assert args.model in ['VGG8', 'DenseNet40', 'ResNet18'], args.model
-if args.model == 'VGG8':
-    from models import VGG
-    model_path = './log/VGG8.pth'   # WAGE mode pretrained model
-    modelCF = VGG.vgg8(args = args, logger=logger, pretrained = model_path)
-elif args.model == 'DenseNet40':
-    from models import DenseNet
-    model_path = './log/DenseNet40.pth'     # WAGE mode pretrained model
-    modelCF = DenseNet.densenet40(args = args, logger=logger, pretrained = model_path)
-elif args.model == 'ResNet18':
-    from models import ResNet
-    # FP mode pretrained model, loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
-    # model_path = './log/xxx.pth'
-    # modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = model_path)
-    modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = True)
-elif args.model == 'custom':
-    from models import Custom
-    modelCF = Custom.l1(args=args, logger=logger, pretrained=None)
-else:
-    raise ValueError("Unknown model type")
+# if args.model == 'VGG8':
+#     from models import VGG
+#     model_path = './log/VGG8.pth'   # WAGE mode pretrained model
+#     modelCF = VGG.vgg8(args = args, logger=logger, pretrained = model_path)
+# elif args.model == 'DenseNet40':
+#     from models import DenseNet
+#     model_path = './log/DenseNet40.pth'     # WAGE mode pretrained model
+#     modelCF = DenseNet.densenet40(args = args, logger=logger, pretrained = model_path)
+# elif args.model == 'ResNet18':
+#     from models import ResNet
+#     # FP mode pretrained model, loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
+#     # model_path = './log/xxx.pth'
+#     # modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = model_path)
+#     modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = True)
+# elif args.model == 'custom':
+from models import Custom
+modelCF = Custom.l1(args=args, logger=logger, pretrained=None)
+# else:
+#     raise ValueError("Unknown model type")
 
 if args.cuda:
 	modelCF.cuda()
