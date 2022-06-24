@@ -174,6 +174,6 @@ class CustomDataset(Dataset):
         size = self.cfg_list[self.model]
 
         img = torch.randn([in_ch, size[0], size[1]])
-        label = torch.ones(out_ch)
+        label = torch.ones(1)
 
         return img, label

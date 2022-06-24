@@ -6,19 +6,19 @@ from modules.floatrange_cpu_np_infer import FConv2d, FLinear
 import torch
 
 class L1(nn.Module):
-    def __init__(self, args, features, num_classes,logger):
+    def __init__(self, args, features, num_classes,out_ch, logger):
         super(L1, self).__init__()
         assert isinstance(features, nn.Sequential), type(features)
         self.features = features
         # print(self.features)
         # print(self.classifier)
-        # self.classifier = make_layers([('L', 64, num_classes)],
-        #                               args, logger)
+        self.classifier = make_layers([('L', out_ch, num_classes)],
+                                      args, logger)
 
     def forward(self, x):
         x = self.features(x)
         x = x.view(x.size(0), -1)
-        # x = self.classifier(x)
+        x = self.classifier(x)
         return x
 
 
@@ -109,7 +109,7 @@ cfg_list_in_ch = {
 def l1( args, logger, pretrained=None):
     cfg = cfg_list[args.model]
     layers = make_layers(cfg, args, logger, cfg_list_in_ch[args.model])
-    model = L1(args, layers, num_classes=10, logger=logger)
+    model = L1(args, layers, num_classes=1, out_ch=cfg[0][1],logger=logger)
     if pretrained is not None:
         model.load_state_dict(torch.load(pretrained))
     return model
