@@ -56,8 +56,9 @@ def write_matrix_activation_fc(input_matrix,fill_dimension,length,filename):
 
 def stretch_input(input_matrix,window_size = 5,padding=(0,0),stride=(1,1)):
     input_shape = input_matrix.shape
-    print(input_shape)
+
     item_num = ((input_shape[2] + 2*padding[0] - window_size) / stride[0] + 1) * ((input_shape[3] + 2*padding[1] - window_size) / stride[1] + 1)
+    print(input_shape, item_num)
     # torch.random.manual_seed(1234)
     output_matrix = np.zeros((input_shape[0],int(item_num),input_shape[1]*window_size*window_size))
     iter = 0
