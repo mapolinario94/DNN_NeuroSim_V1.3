@@ -12,8 +12,7 @@ class L1(nn.Module):
         self.features = features
         # print(self.features)
         # print(self.classifier)
-        self.classifier = make_layers([('L', out_ch, num_classes)],
-                                      args, logger)
+        self.classifier = make_layers([('L', out_ch, num_classes)], args, logger, in_ch=0)
 
     def forward(self, x):
         x = self.features(x)
