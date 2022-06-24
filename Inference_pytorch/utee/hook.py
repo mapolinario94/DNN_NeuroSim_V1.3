@@ -56,18 +56,18 @@ def write_matrix_activation_fc(input_matrix,fill_dimension,length,filename):
 
 def stretch_input(input_matrix,window_size = 5,padding=(0,0),stride=(1,1)):
     input_shape = input_matrix.shape
-
+    input_matrix = np.pad(input_matrix, padding[0])
     item_num = ((input_shape[2] + 2*padding[0] - window_size) / stride[0] + 1) * ((input_shape[3] + 2*padding[1] - window_size) / stride[1] + 1)
     print(input_shape, item_num)
     # torch.random.manual_seed(1234)
     output_matrix = np.zeros((input_shape[0],int(item_num),input_shape[1]*window_size*window_size))
     iter = 0
-    # for i in range( int(((input_shape[2] + 2*padding[0] - window_size) / stride[0] + 1))):
-    #     for j in range( int(((input_shape[3] + 2*padding[1] - window_size) / stride[1] + 1))):
-    for i in range(input_shape[2] - window_size + 1):
-        for j in range(input_shape[3] - window_size + 1):
+    for i in range( int(((input_shape[2] + 2*padding[0] - window_size) / stride[0] + 1))):
+        for j in range( int(((input_shape[3] + 2*padding[1] - window_size) / stride[1] + 1))):
+    # for i in range(input_shape[2] - window_size + 1):
+    #     for j in range(input_shape[3] - window_size + 1):
             for b in range(input_shape[0]):
-                output_matrix[b,iter,:] = input_matrix[b, :, i:i+window_size,j: j+window_size].reshape(input_shape[1]*window_size*window_size)
+                output_matrix[b,iter,:] = input_matrix[b, :, stride[0]*i:stride[0]*i+window_size,stride[0]*j: stride[0]*j+window_size].reshape(input_shape[1]*window_size*window_size)
             iter += 1
 
     return output_matrix
