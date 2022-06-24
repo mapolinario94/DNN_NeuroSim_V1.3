@@ -59,7 +59,7 @@ def stretch_input(input_matrix,window_size = 5,padding=(0,0),stride=(1,1)):
     print(input_shape)
     item_num = ((input_shape[2] + 2*padding[0] - window_size) / stride[0] + 1) * ((input_shape[3] + 2*padding[1] - window_size) / stride[1] + 1)
     # torch.random.manual_seed(1234)
-    output_matrix = torch.zeros((input_shape[0],int(item_num),input_shape[1]*window_size*window_size))
+    output_matrix = np.zeros((input_shape[0],int(item_num),input_shape[1]*window_size*window_size))
     iter = 0
     for i in range( int(((input_shape[2] + 2*padding[0] - window_size) / stride[0] + 1))):
         for j in range( int(((input_shape[3] + 2*padding[1] - window_size) / stride[1] + 1))):
