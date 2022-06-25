@@ -30,7 +30,7 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate (defau
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
 parser.add_argument('--wl_weight', type=int, default=4)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=8)
+parser.add_argument('--wl_activate', type=int, default=4)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
