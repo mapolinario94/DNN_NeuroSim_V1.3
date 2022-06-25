@@ -94,7 +94,7 @@ Param::Param() {
 	novelMapping = false;        // false: conventional mapping
 								// true: novel mapping
 
-	SARADC = false;              // false: MLSA
+	SARADC = true;              // false: MLSA
 	                            // true: sar ADC
 	currentMode = true;         // false: MLSA use VSA
 	                            // true: MLSA use CSA
