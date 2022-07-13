@@ -97,7 +97,7 @@ else:
 #     modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = True)
 # elif args.model == 'custom':
 from models import Custom
-modelCF = Custom.l1(args=args, logger=logger, pretrained=None)
+modelCF = Custom.sfn(args=args, logger=logger, pretrained=None)
 # else:
 #     raise ValueError("Unknown model type")
 
