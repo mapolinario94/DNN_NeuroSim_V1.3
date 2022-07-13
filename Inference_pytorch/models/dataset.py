@@ -146,7 +146,8 @@ class CustomDataset(Dataset):
             'l14': (224, 32),
             'l15': (100, 32),
             'l16': (32, 32),
-            'l17': (4, 32)
+            'l17': (4, 32),
+            'l18': (4, 512),
 
         }
         self.cfg_list = {
@@ -167,6 +168,7 @@ class CustomDataset(Dataset):
             'l15': ( 259, 259),
             'l16': (256,256),
             'l17': (256,256),
+            'l18': (256, 256),
         }
     def __len__(self):
         return 10
