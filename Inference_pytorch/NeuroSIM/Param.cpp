@@ -127,9 +127,9 @@ Param::Param() {
 	// technode: 22      --> wireWidth: 40
 	// technode: 14      --> wireWidth: 25
 	// technode: 10, 7   --> wireWidth: 18
-	technode = 32;                      // Technology
+	technode = 65;                      // Technology
 	featuresize = 40e-9;                // Wire width for subArray simulation
-	wireWidth = 56;                     // wireWidth of the cell for Accuracy calculation
+	wireWidth = 105;                     // wireWidth of the cell for Accuracy calculation
 	globalBusDelayTolerance = 0.1;      // to relax bus delay for global H-Tree (chip level: communication among tiles), if tolerance is 0.1, the latency will be relax to (1+0.1)*optimalLatency (trade-off with energy)
 	localBusDelayTolerance = 0.1;       // to relax bus delay for global H-Tree (tile level: communication among PEs), if tolerance is 0.1, the latency will be relax to (1+0.1)*optimalLatency (trade-off with energy)
 	treeFoldedRatio = 4;                // the H-Tree is assumed to be able to folding in layout (save area)
@@ -144,8 +144,8 @@ Param::Param() {
 	relaxArrayCellHeight = 0;           // relax ArrayCellHeight or not
 	relaxArrayCellWidth = 0;            // relax ArrayCellWidth or not
 
-	numColMuxed = 8;                    // How many columns share 1 ADC (for eNVM and FeFET) or parallel SRAM
-	levelOutput = 32;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
+	numColMuxed = 1;                    // How many columns share 1 ADC (for eNVM and FeFET) or parallel SRAM
+	levelOutput = 2;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
 	cellBit = 1;                        // precision of memory device
 
 	/*** parameters for SRAM ***/

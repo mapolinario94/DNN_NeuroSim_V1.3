@@ -6,7 +6,7 @@ from modules.floatrange_cpu_np_infer import FConv2d, FLinear
 import torch
 
 class L1(nn.Module):
-    def __init__(self, args, features, num_classes,out_ch, logger):
+    def __init__(self, args, features, num_classes, out_ch, logger):
         super(L1, self).__init__()
         assert isinstance(features, nn.Sequential), type(features)
         self.features = features
@@ -87,6 +87,10 @@ cfg_list = {
     'l15': [('C', 32, 4, 0, 1), ('M', 256, 256)],
     'l16': [('C', 64, 3, 1, 1), ('M', 256, 256)],
     'l17': [('C', 64, 3, 1, 1), ('M', 256, 256)],
+    'l18': [('C', 64, 3, 1, 2), ('C', 128, 3, 1, 2),
+            ('C', 256, 3, 1, 2), ('C', 512, 3, 1, 1),
+            ('C', 512, 3, 1, 1), ('C', 512, 3, 1, 1),
+            ('C', 512, 3, 1, 1), ('C', 512, 3, 1, 1), ('M', 16, 16)],
 }
 
 cfg_list_in_ch = {
@@ -107,12 +111,13 @@ cfg_list_in_ch = {
     'l15': 100,
     'l16': 32,
     'l17': 4,
+    'L18': 4,
 }
 
 def l1( args, logger, pretrained=None):
     cfg = cfg_list[args.model]
     layers = make_layers(cfg, args, logger, cfg_list_in_ch[args.model])
-    model = L1(args, layers, num_classes=1, out_ch=cfg[0][1],logger=logger)
+    model = L1(args, layers, num_classes=1, out_ch=cfg[-1][1], logger=logger)
     if pretrained is not None:
         model.load_state_dict(torch.load(pretrained))
     return model
