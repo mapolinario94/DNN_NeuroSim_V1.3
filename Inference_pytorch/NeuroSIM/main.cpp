@@ -186,7 +186,7 @@ int main(int argc, char * argv[]) {
 
 	ChipInitialize(inputParameter, tech, cell, netStructure, markNM, numTileEachLayer,
 					numPENM, desiredNumTileNM, desiredPESizeNM, desiredNumTileCM, desiredTileSizeCM, desiredPESizeCM, numTileRow, numTileCol);
-
+    cout << "---------------------------- ChipInitialize ------------------------------" <<  endl;
 	double chipHeight, chipWidth, chipArea, chipAreaIC, chipAreaADC, chipAreaAccum, chipAreaOther, chipAreaArray;
 	double CMTileheight = 0;
 	double CMTilewidth = 0;
@@ -202,7 +202,7 @@ int main(int argc, char * argv[]) {
 	chipAreaAccum = chipAreaResults[3];
 	chipAreaOther = chipAreaResults[4];
 	chipAreaArray = chipAreaResults[5];
-
+    cout << "---------------------------- ChipArea ------------------------------" <<  endl;
 	double clkPeriod = 0;
 	double layerclkPeriod = 0;
 	
@@ -245,6 +245,7 @@ int main(int argc, char * argv[]) {
 						numPENM, desiredPESizeNM, desiredTileSizeCM, desiredPESizeCM, CMTileheight, CMTilewidth, NMTileheight, NMTilewidth,
 						&layerReadLatency, &layerReadDynamicEnergy, &tileLeakage, &layerbufferLatency, &layerbufferDynamicEnergy, &layericLatency, &layericDynamicEnergy,
 						&coreLatencyADC, &coreLatencyAccum, &coreLatencyOther, &coreEnergyADC, &coreEnergyAccum, &coreEnergyOther, true, &layerclkPeriod);
+			cout << "---------------------------- ChipPerformance ------------------------------" << i <<  endl;
 			if(clkPeriod < layerclkPeriod){
 				clkPeriod = layerclkPeriod;
 			}
