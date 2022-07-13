@@ -88,7 +88,7 @@ cfg_list = {
     'l16': [('C', 64, 3, 1, 1), ('M', 256, 256)],
     'l17': [('C', 64, 3, 1, 1), ('M', 256, 256)],
     'l18': [('C', 64, 3, 1, 2), ('C', 128, 3, 1, 2),
-            ('C', 256, 3, 1, 2), ('C', 512, 3, 1, 1),
+            ('C', 256, 3, 1, 2), ('C', 512, 3, 1, 2),
             ('C', 512, 3, 1, 1), ('C', 512, 3, 1, 1),
             ('C', 512, 3, 1, 1), ('C', 512, 3, 1, 1), ('M', 16, 16)],
 }
@@ -117,7 +117,7 @@ cfg_list_in_ch = {
 def l1( args, logger, pretrained=None):
     cfg = cfg_list[args.model]
     layers = make_layers(cfg, args, logger, cfg_list_in_ch[args.model])
-    model = L1(args, layers, num_classes=1, out_ch=cfg[-1][1], logger=logger)
+    model = L1(args, layers, num_classes=1, out_ch=cfg[-2][1], logger=logger)
     if pretrained is not None:
         model.load_state_dict(torch.load(pretrained))
     return model
