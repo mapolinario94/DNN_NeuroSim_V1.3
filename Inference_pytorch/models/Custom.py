@@ -111,7 +111,7 @@ cfg_list_in_ch = {
     'l15': 100,
     'l16': 32,
     'l17': 4,
-    'L18': 4,
+    'l18': 4,
 }
 
 def l1( args, logger, pretrained=None):
