@@ -261,7 +261,7 @@ vector<vector<double> > ChipFloorPlan(bool findNumTile, bool findUtilization, bo
 			speedUpEachLayer = OverallEachLayer(false, true, peDup, subArrayDup, pipelineSpeedUp, (*desiredTileSizeCM), (*desiredPESizeNM), markNM, netStructure, numRowPerSynapse, numColPerSynapse, numPENM);
 		}
 	} else {   // all Conventional Mapping
-		if (maxTileSizeCM < 4*param->numRowSubArray) {
+		if (false){ //maxTileSizeCM < 4*param->numRowSubArray) {
 			cout << "ERROR: SubArray Size is too large, which break the chip hierarchey, please decrease the SubArray size! " << endl;
 		} else {
 			/*** Tile Design ***/
