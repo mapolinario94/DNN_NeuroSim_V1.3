@@ -30,13 +30,13 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate (defau
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
 parser.add_argument('--wl_weight', type=int, default=4)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=5)
+parser.add_argument('--wl_activate', type=int, default=20)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
 parser.add_argument('--inference', type=int, default=0, help='run hardware inference simulation')
 parser.add_argument('--subArray', type=int, default=64, help='size of subArray (e.g. 128*128)')
-parser.add_argument('--ADCprecision', type=int, default=2, help='ADC precision (e.g. 5-bit)')
+parser.add_argument('--ADCprecision', type=int, default=1, help='ADC precision (e.g. 5-bit)')
 parser.add_argument('--cellBit', type=int, default=1, help='cell precision (e.g. 4-bit/cell)')
 parser.add_argument('--onoffratio', type=float, default=150, help='device on/off ratio (e.g. Gmax/Gmin = 3)')
 # if do not run the device retention / conductance variation effects, set vari=0, v=0
@@ -97,12 +97,16 @@ else:
 #     modelCF = ResNet.resnet18(args = args, logger=logger, pretrained = True)
 # elif args.model == 'custom':
 from models import Custom
-modelCF = Custom.sfn(args=args, logger=logger, pretrained=None)
+from models import DVSNet
+if args.model == 'DVSNet':
+    modelCF = DVSNet.dvsnet(args=args, logger=logger, pretrained=None)
+else:
+    modelCF = Custom.sfn(args=args, logger=logger, pretrained=None)
 # else:
 #     raise ValueError("Unknown model type")
 
 if args.cuda:
-	modelCF.cuda()
+    modelCF.cuda()
 
 best_acc, old_file = 0, None
 t_begin = time.time()

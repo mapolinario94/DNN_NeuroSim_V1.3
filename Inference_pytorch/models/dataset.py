@@ -148,7 +148,8 @@ class CustomDataset(Dataset):
             'l16': (32, 32),
             'l17': (4, 32),
             'l18': (4, 512),
-            'SFN': (4, 1)
+            'SFN': (4, 1),
+            'DVSNet': (2, 11),
         }
         self.cfg_list = {
             'l1': (256, 256),
@@ -170,7 +171,9 @@ class CustomDataset(Dataset):
             'l17': (256,256),
             'l18': (256, 256),
             'SFN': (256, 256),
+            'DVSNet': (64, 64),
         }
+
     def __len__(self):
         return 10
 
@@ -182,6 +185,9 @@ class CustomDataset(Dataset):
         size = self.cfg_list[self.model]
         torch.random.manual_seed(1234)
         img = torch.ones([in_ch, size[0], size[1]])
-        label = torch.ones(1)
+        if self.model == 'DVSNet':
+            label = torch.ones(11)
+        else:
+            label = torch.ones(1)
 
         return img, label
