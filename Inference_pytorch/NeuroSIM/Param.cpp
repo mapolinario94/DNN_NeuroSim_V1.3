@@ -137,8 +137,8 @@ Param::Param() {
 										// NOTE: Carefully choose this number!!!
 										// e.g. when use pipeline with high speedUpDegree, i.e. high throughput, need to increase the global bus width (interface of global buffer) --> guarantee global buffer speed
 
-	numRowSubArray = 128;               // # of rows in single subArray
-	numColSubArray = 128;               // # of columns in single subArray
+	numRowSubArray = 32;               // # of rows in single subArray
+	numColSubArray = 32;               // # of columns in single subArray
 
 	/*** option to relax subArray layout ***/
 	relaxArrayCellHeight = 0;           // relax ArrayCellHeight or not
@@ -146,7 +146,7 @@ Param::Param() {
 
 	numColMuxed = 8;                    // How many columns share 1 ADC (for eNVM and FeFET) or parallel SRAM
 	levelOutput = 32;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
-	cellBit = 1;                        // precision of memory device
+	cellBit = 2;                        // precision of memory device
 
 	/*** parameters for SRAM ***/
 	// due the scaling, suggested SRAM cell size above 22nm: 160F^2
