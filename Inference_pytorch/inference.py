@@ -28,9 +28,9 @@ parser.add_argument('--test_interval', type=int, default=1,  help='how many epoc
 parser.add_argument('--logdir', default='log/default', help='folder to save to the log')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate (default: 1e-3)')
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
-parser.add_argument('--wl_weight', type=int, default=8)
+parser.add_argument('--wl_weight', type=int, default=4)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=8)
+parser.add_argument('--wl_activate', type=int, default=5)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
