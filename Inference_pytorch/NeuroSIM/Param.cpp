@@ -109,7 +109,7 @@ Param::Param() {
 	validated = false;			// false: no calibration factors
 								// true: validated by silicon data (wiring area in layout, gate switching activity, post-layout performance drop...)
 
-	synchronous = false;			// false: asynchronous
+	synchronous = true;			// false: asynchronous
 								// true: synchronous, clkFreq will be decided by sensing delay
 
 	/*** algorithm weight range, the default wrapper (based on WAGE) has fixed weight range of (-1, 1) ***/
