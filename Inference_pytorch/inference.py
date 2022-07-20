@@ -99,12 +99,15 @@ else:
 from models import Custom
 from models import DVSNet
 from models import SNN_VGG
+from models import SNN_ResNet
 if args.model == 'DVSNet':
     modelCF = DVSNet.dvsnet(args=args, logger=logger, pretrained=None)
 elif args.model == 'SFN':
     modelCF = Custom.sfn(args=args, logger=logger, pretrained=None)
-if args.model == 'SNN_VGG':
+elif args.model == 'SNN_VGG':
     modelCF = SNN_VGG.snn_vgg(args=args, logger=logger, pretrained=None)
+elif args.model == 'SNN_ResNet':
+    modelCF = SNN_ResNet.snn_resnet(args=args, logger=logger, pretrained=None)
 else:
     modelCF = Custom.l1(args=args, logger=logger, pretrained=None)
 # else:

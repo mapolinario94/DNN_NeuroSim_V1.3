@@ -150,7 +150,8 @@ class CustomDataset(Dataset):
             'l18': (4, 512),
             'SFN': (4, 1),
             'DVSNet': (2, 11),
-            'SNN_VGG': (3, 100)
+            'SNN_VGG': (3, 100),
+            'SNN_ResNet': (3, 100)
         }
         self.cfg_list = {
             'l1': (256, 256),
@@ -174,6 +175,7 @@ class CustomDataset(Dataset):
             'SFN': (256, 256),
             'DVSNet': (64, 64),
             'SNN_VGG': (32, 32),
+            'SNN_ResNet': (32, 32),
         }
 
     def __len__(self):
@@ -189,7 +191,7 @@ class CustomDataset(Dataset):
         img = torch.ones([in_ch, size[0], size[1]])
         if self.model == 'DVSNet':
             label = torch.ones(11)
-        elif self.model == "SNN_VGG":
+        elif self.model == "SNN_VGG" or self.model == "SNN_ResNet":
             label = torch.ones(100)
         else:
             label = torch.ones(1)
