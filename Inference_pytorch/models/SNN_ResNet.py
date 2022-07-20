@@ -78,7 +78,7 @@ class SNN_ResNet(nn.Module):
                              ADCprecision=args.ADCprecision, vari=args.vari, t=args.t, v=args.v, detect=args.detect,
                              target=args.target, name='Conv' + str(9) + '_', model=args.model)
 
-        self.conv10 = QConv2d(64, 128, kernel_size=1, padding=1, stride=2,
+        self.conv10 = QConv2d(64, 128, kernel_size=1, padding=0, stride=2,
                              logger=logger, wl_input=args.wl_activate, wl_activate=args.wl_activate,
                              wl_error=args.wl_error, wl_weight=args.wl_weight, inference=args.inference,
                              onoffratio=args.onoffratio, cellBit=args.cellBit, subArray=args.subArray,
@@ -115,7 +115,7 @@ class SNN_ResNet(nn.Module):
                              ADCprecision=args.ADCprecision, vari=args.vari, t=args.t, v=args.v, detect=args.detect,
                              target=args.target, name='Conv' + str(14) + '_', model=args.model)
 
-        self.conv15 = QConv2d(128, 256, kernel_size=1, padding=1, stride=2,
+        self.conv15 = QConv2d(128, 256, kernel_size=1, padding=0, stride=2,
                               logger=logger, wl_input=args.wl_activate, wl_activate=args.wl_activate,
                               wl_error=args.wl_error, wl_weight=args.wl_weight, inference=args.inference,
                               onoffratio=args.onoffratio, cellBit=args.cellBit, subArray=args.subArray,
@@ -152,7 +152,7 @@ class SNN_ResNet(nn.Module):
                               ADCprecision=args.ADCprecision, vari=args.vari, t=args.t, v=args.v, detect=args.detect,
                               target=args.target, name='Conv' + str(19) + '_', model=args.model)
 
-        self.conv20 = QConv2d(256, 512, kernel_size=1, padding=1, stride=1,
+        self.conv20 = QConv2d(256, 512, kernel_size=1, padding=0, stride=1,
                               logger=logger, wl_input=args.wl_activate, wl_activate=args.wl_activate,
                               wl_error=args.wl_error, wl_weight=args.wl_weight, inference=args.inference,
                               onoffratio=args.onoffratio, cellBit=args.cellBit, subArray=args.subArray,
