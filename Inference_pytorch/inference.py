@@ -30,7 +30,7 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate (defau
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
 parser.add_argument('--wl_weight', type=int, default=4)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=5)
+parser.add_argument('--wl_activate', type=int, default=10)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
@@ -98,10 +98,13 @@ else:
 # elif args.model == 'custom':
 from models import Custom
 from models import DVSNet
+from models import SNN_VGG
 if args.model == 'DVSNet':
     modelCF = DVSNet.dvsnet(args=args, logger=logger, pretrained=None)
 elif args.model == 'SFN':
     modelCF = Custom.sfn(args=args, logger=logger, pretrained=None)
+if args.model == 'SNN_VGG':
+    modelCF = SNN_VGG.snn_vgg(args=args, logger=logger, pretrained=None)
 else:
     modelCF = Custom.l1(args=args, logger=logger, pretrained=None)
 # else:
