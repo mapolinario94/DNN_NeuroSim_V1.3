@@ -151,7 +151,8 @@ class CustomDataset(Dataset):
             'SFN': (4, 1),
             'DVSNet': (2, 11),
             'SNN_VGG': (3, 100),
-            'SNN_ResNet': (3, 100)
+            'SNN_ResNet': (3, 100),
+            'FireFlowNet': (4, 1)
         }
         self.cfg_list = {
             'l1': (256, 256),
@@ -169,13 +170,14 @@ class CustomDataset(Dataset):
             'l13': ( 67, 67),
             'l14': ( 131, 131),
             'l15': ( 259, 259),
-            'l16': (256,256),
-            'l17': (256,256),
+            'l16': (256, 256),
+            'l17': (256, 256),
             'l18': (256, 256),
             'SFN': (256, 256),
             'DVSNet': (64, 64),
             'SNN_VGG': (32, 32),
             'SNN_ResNet': (32, 32),
+            'FireFlowNet': (256, 256)
         }
 
     def __len__(self):
