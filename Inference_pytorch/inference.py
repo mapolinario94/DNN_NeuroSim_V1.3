@@ -35,8 +35,8 @@ parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
 parser.add_argument('--inference', type=int, default=0, help='run hardware inference simulation')
-parser.add_argument('--subArray', type=int, default=32, help='size of subArray (e.g. 128*128)')
-parser.add_argument('--ADCprecision', type=int, default=1, help='ADC precision (e.g. 5-bit)')
+parser.add_argument('--subArray', type=int, default=128, help='size of subArray (e.g. 128*128)')
+parser.add_argument('--ADCprecision', type=int, default=5, help='ADC precision (e.g. 5-bit)')
 parser.add_argument('--cellBit', type=int, default=1, help='cell precision (e.g. 4-bit/cell)')
 parser.add_argument('--onoffratio', type=float, default=150, help='device on/off ratio (e.g. Gmax/Gmin = 3)')
 # if do not run the device retention / conductance variation effects, set vari=0, v=0
